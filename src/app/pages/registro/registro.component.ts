@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioModel } from '../../models/usuario.models';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-registro',
@@ -10,10 +11,19 @@ export class RegistroComponent implements OnInit {
 
   usuario:UsuarioModel
 
-  constructor() { }
+  constructor() {
+   }
 
   ngOnInit() { 
+    this.usuario = new UsuarioModel()
   }
 
+  onSubmit(form:NgForm){
+    if(form.invalid){
+      return false;
+    }
+    console.log(form);
+    console.log(this.usuario);
+  }
 
 }
