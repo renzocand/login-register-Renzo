@@ -9,17 +9,25 @@ export class AuthService {
 
   url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty";
   apikey = "AIzaSyCNveWJWCxndROVKPD1lQXPNy9Xb_xf2FI"
-  usuario:UsuarioModel
 
   constructor(private http:HttpClient) { }
 
-  crearUsuario(){
+  crearUsuario(usuario:UsuarioModel){
     let body = {
-      email: this.usuario.email,
-      password: this.usuario.password,
+      email: usuario.email,
+      password: usuario.password,
       returnSecureToken: true
     }
-    this.http.post(`${this.url}/signupNewUser?key=${this.apikey}`,body)
+    return this.http.post(`${this.url}/signupNewUser?key=${this.apikey}`,body)
+  }
+
+  loginUsuario(usuario:UsuarioModel){
+    let body = {
+      email: usuario.email,
+      password: usuario.password,
+      returnSecureToken: true
+    }
+    return this.http.post(`${this.url}/verifyPassword?key=${this.apikey}`,body)
   }
   
 }
