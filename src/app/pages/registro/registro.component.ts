@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class RegistroComponent implements OnInit {
 
   usuario:UsuarioModel
+  recordar = false;
 
   constructor(private _as:AuthService, private router:Router) {
    }
@@ -33,6 +34,9 @@ export class RegistroComponent implements OnInit {
     Swal.showLoading()
 
     this._as.crearUsuario(this.usuario).subscribe(data=>{
+      if(this.recordar){
+        localStorage.setItem('email', this.usuario.email)
+      }
       Swal.close()
       this.router.navigateByUrl('/home')
       console.log(data);
